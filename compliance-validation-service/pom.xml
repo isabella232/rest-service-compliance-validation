@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+
+  <!-- *********************************************************************** -->
+    <!-- Project Identification -->
+    <!-- *********************************************************************** -->
+	<artifactId>compliance-validation-service</artifactId>
+	<packaging>jar</packaging>
+
+	<name>Compliance Validation Service</name>
+	<description>Compliance Validation Service</description>
+
+    <!-- *********************************************************************** -->
+    <!-- Project Parent -->
+    <!-- *********************************************************************** -->
+	<parent>
+        <groupId>gov.nsf.psm</groupId>
+        <artifactId>compliance-validation</artifactId>
+        <version>2.0.0-RC.50.1-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<psm.compliancevalidation.api.version>2.0.0-RC.50.1-SNAPSHOT</psm.compliancevalidation.api.version>
+		<psm.foundation.version>2.0.0-RC.50.1-SNAPSHOT</psm.foundation.version>
+		<commons.io.version>2.5</commons.io.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+ 		<kie.version>6.5.0.Final-redhat-7</kie.version>
+ 		<springfox.version>2.6.1</springfox.version>
+    	<springfox.ui.version>2.6.1</springfox.ui.version>
+    	<sonar.exclusions>
+    	src/main/java/gov/nsf/psm/compliancevalidation/ComplianceValidationServiceApplication.java,
+    	src/main/java/gov/nsf/psm/compliancevalidation/config/**,
+    	src/main/java/gov/nsf/psm/compliancevalidation/controller/**,
+    	src/main/java/gov/nsf/psm/compliancevalidation/conversion/utility/**
+    	</sonar.exclusions>
+	</properties>
+
+	<dependencies>
+       <dependency>
+            <groupId>gov.nsf.psm</groupId>
+            <artifactId>compliance-validation-service-api</artifactId>
+            <version>${psm.compliancevalidation.api.version}</version>
+        </dependency>
+		<dependency>
+			<groupId>gov.nsf.psm</groupId>
+			<artifactId>psm-foundation</artifactId>
+			<version>${psm.foundation.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjtools</artifactId>
+		    <version>1.8.13</version>
+		</dependency>
+
+		<!-- BRMS related Dependencies -->
+		<!-- Drools -->
+
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-ci</artifactId>
+        <version>${kie.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-api</artifactId>
+        <version>${kie.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.drools</groupId>
+        <artifactId>drools-decisiontables</artifactId>
+        <version>${kie.version}</version>
+      </dependency>
+
+      	<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.15</version>
+		</dependency>
+
+	 <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi</artifactId>
+        <version>3.15</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.drools</groupId>
+        <artifactId>drools-core</artifactId>
+        <version>${kie.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-spring</artifactId>
+        <version>${kie.version}</version>
+      </dependency>
+
+      <!-- PSM Fact Model Dependency -->
+       <dependency>
+			<groupId>gov.nsf.psm</groupId>
+			<artifactId>psm-fact-model</artifactId>
+		    <version>2.0.0-RC.50.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- Database dependencies -->
+		<dependency>
+			<groupId>com.sybase.jdbc4.jdbc</groupId>
+			<artifactId>jconn4</artifactId>
+			<version>6.0</version>
+		</dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons.io.version}</version>
+        </dependency>
+
+		<!-- Test dependencies -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.restdocs</groupId>
+			<artifactId>spring-restdocs-mockmvc</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+        <groupId>org.yaml</groupId>
+        <artifactId>snakeyaml</artifactId>
+        <version>1.19</version>
+        <scope>test</scope>
+    </dependency>
+
+		 <!-- API documentation dependencies -->
+         <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox.ui.version}</version>
+        </dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+			  <groupId>org.springframework.boot</groupId>
+			  <artifactId>spring-boot-maven-plugin</artifactId>
+			  <executions>
+			    <execution>
+			      <goals>
+			        <goal>build-info</goal>
+			      </goals>
+			      <configuration>
+			        <additionalProperties>
+			          <encoding.source>UTF-8</encoding.source>
+			          <encoding.reporting>UTF-8</encoding.reporting>
+			          <java.source>${java.version}</java.source>
+			          <java.target>${java.version}</java.target>
+			          <timestamp>${maven.build.timestamp}</timestamp>
+			          <dependencies.psm-foundation>${psm.foundation.version}</dependencies.psm-foundation>
+			          <dependencies.kie.version>${kie.version}</dependencies.kie.version>
+			        </additionalProperties>
+			      </configuration>
+			    </execution>
+			  </executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

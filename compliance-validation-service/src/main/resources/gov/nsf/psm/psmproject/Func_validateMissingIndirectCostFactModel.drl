@@ -1,0 +1,114 @@
+package gov.nsf.psm.psmproject;
+import gov.nsf.psm.factmodel.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
+import java.util.List;
+import org.apache.commons.lang.StringUtils;
+import java.math.BigDecimal;
+
+function boolean validateMissingIndirectCostFactModelRateAmounts(LinkedHashMap nameMap, LinkedHashMap rateMap, LinkedHashMap amtMap, LinkedHashMap lineMap, LinkedHashMap rateAmtMap, LinkedHashMap completeMap) 
+{
+    boolean costRatemissing = false;
+    boolean missing = false;
+       
+     boolean emptyCostOrRate = false;
+        
+        if (!nameMap.values().isEmpty()) {
+            emptyCostOrRate = validateIndirectCostFactModelNames(nameMap, rateMap, amtMap, lineMap, rateAmtMap);
+        }
+        if (!amtMap.values().isEmpty()) {
+            emptyCostOrRate = validateMissingIndirectCostFactModelAmounts(amtMap);
+        }
+        if (!rateMap.values().isEmpty()) {
+            emptyCostOrRate = validateMissingIndirectCostFactModelRates(rateMap);
+        }
+   if (!rateAmtMap.values().isEmpty())
+  {
+
+     for (Object obj1 : rateAmtMap.entrySet()) 
+     {
+       Entry entry =  (Entry) obj1;
+       if (!completeMap.containsKey(entry.getKey())) {
+      costRatemissing = true;
+     }
+     }
+   if (costRatemissing && !emptyCostOrRate) {
+    missing = true;
+   }
+          
+   }   
+ 
+     return missing;
+}
+
+/* function boolean validateIndirectCostFactModelNames(LinkedHashMap nameMap, LinkedHashMap rateMap, LinkedHashMap amtMap, LinkedHashMap lineMap, LinkedHashMap rateAmtMap) 
+{
+    boolean missing = false;
+ if (!nameMap.values().isEmpty())
+ {
+        if (!amtMap.values().isEmpty() || !rateMap.values().isEmpty() || !rateAmtMap.values().isEmpty()) {
+            missing = true;
+        } else {
+            for (Object obj1 : lineMap.values()) 
+            {
+                Integer itemNo = (Integer)obj1;
+                if (!nameMap.values().contains(itemNo)) {
+                    missing = true;
+                }
+            }
+            for (Object obj2 : nameMap.entrySet()) {
+                
+              Entry entry =  (Entry) obj2;
+                if(StringUtils.isEmpty((String)entry.getKey())) {
+                    missing = true;
+                }
+                        
+            }
+        }
+
+ }
+    return missing;
+}
+
+function boolean validateMissingIndirectCostFactModelRates(LinkedHashMap rateMap) 
+{
+    boolean missing = false;
+ if (!rateMap.values().isEmpty()) {
+
+  List costRateYears = null;
+  for (Object obj1 : rateMap.entrySet()) 
+   {
+       Entry entry =  (Entry) obj1;
+     Object obj2 = rateMap.get(entry.getKey());
+     
+     costRateYears = (List) obj2;
+  }            
+  if(costRateYears != null && !costRateYears.isEmpty()) {
+   missing = true;
+  }
+ } 
+    return missing;
+}
+
+
+function boolean validateMissingIndirectCostFactModelAmounts(LinkedHashMap amtMap) 
+{
+    boolean missing = false;
+ if (!amtMap.values().isEmpty()) 
+ {
+  List dollarAmtYears = null;
+  for (Object obj1 : amtMap.entrySet()) 
+   {
+       Entry entry =  (Entry) obj1;
+     Object obj2 = amtMap.get(entry.getKey());
+     dollarAmtYears = (List) obj2;
+  }            
+  if(dollarAmtYears != null && !dollarAmtYears.isEmpty()) {
+   missing = true;
+  }
+ }
+    return missing;
+} 
+
+*/

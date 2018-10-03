@@ -1,0 +1,34 @@
+package gov.nsf.psm.psmproject;
+import gov.nsf.psm.factmodel.*;
+import java.util.List;
+import org.apache.commons.lang.StringUtils;
+
+
+function boolean checkFontNameNonCompliant(List pagesList)
+{
+    
+    if(pagesList== null 
+          
+          || pagesList.size()==0)
+          {
+            return false;
+          }
+          
+        for (int i = 0; i < pagesList.size(); i++)
+          {
+              PageFactModel pageFactModel = (PageFactModel)pagesList.get(i);
+              List<FontFactModel>  fontFactModelList = pageFactModel.getTextFonts();
+               for (int j = 0; j < fontFactModelList.size(); j++)
+                {
+                    
+                    FontFactModel fontfactModel = (FontFactModel)fontFactModelList.get(j);
+                    
+                      if(!fontfactModel.isFontNameCompliant())
+                      {
+                          return true;
+                      }
+                }
+              
+          }
+      return false;  
+}
